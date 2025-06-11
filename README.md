@@ -4,35 +4,35 @@ It shall NOT be edited by hand.
 -->
 
 <h1>
-  <img src="https://raw.githubusercontent.com/YunoHost/apps/main/logos/conduit.png" width="32px" alt="Logo of Conduit">
-  Conduit, packaged for YunoHost
+  <img src="https://raw.githubusercontent.com/YunoHost/apps/main/logos/tuwunel.png" width="32px" alt="Logo of Tuwunel">
+  Tuwunel, packaged for YunoHost
 </h1>
 
-Simple, fast and reliable chat server powered by Matrix
+Simple, fast and reliable chat server powered by Matrix based on Conduit and Conduwuit
 
-[![🌐 Official app website](https://img.shields.io/badge/Official_app_website-darkgreen?style=for-the-badge)](https://conduit.rs/)
-[![Version: 0.10.4~ynh1](https://img.shields.io/badge/Version-0.10.4~ynh1-rgba(0,150,0,1)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/conduit/)
+[![🌐 Official app website](https://img.shields.io/badge/Official_app_website-darkgreen?style=for-the-badge)](https://tuwunel.chat/)
+[![Version: 1.0.0~ynh1](https://img.shields.io/badge/Version-1.0.0~ynh1-rgba(0,150,0,1)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/tuwunel/)
 
 <div align="center">
-<a href="https://apps.yunohost.org/app/conduit"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_more_info_on_the_appstore.svg"/></a>
-<a href="https://github.com/YunoHost-Apps/conduit_ynh/issues"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_report_an_issue.svg"/></a>
+<a href="https://apps.yunohost.org/app/tuwunel"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_more_info_on_the_appstore.svg"/></a>
+<a href="https://github.com/YunoHost-Apps/tuwunel_ynh/issues"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_report_an_issue.svg"/></a>
 </div>
 
 ## 📦 Developer info
 
-[![Automatic tests level](https://apps.yunohost.org/badge/cilevel/conduit)](https://ci-apps.yunohost.org/ci/apps/conduit/)
+[![Automatic tests level](https://apps.yunohost.org/badge/cilevel/tuwunel)](https://ci-apps.yunohost.org/ci/apps/tuwunel/)
 
-🛠️ Upstream Conduit repository: <https://gitlab.com/famedly/conduit>
+🛠️ Upstream Tuwunel repository: <https://github.com/matrix-construct/tuwunel>
 
-Pull request are welcome and should target the [`testing` branch](https://github.com/YunoHost-Apps/conduit_ynh/tree/testing).
+Pull request are welcome and should target the [`testing` branch](https://github.com/YunoHost-Apps/tuwunel_ynh/tree/testing).
 
 The `testing` branch can be tested using:
 ```
 # fresh install:
-sudo yunohost app install https://github.com/YunoHost-Apps/conduit_ynh/tree/testing
+sudo yunohost app install https://github.com/YunoHost-Apps/tuwunel_ynh/tree/testing
 
 # upgrade an existing install:
-sudo yunohost app upgrade conduit -u https://github.com/YunoHost-Apps/conduit_ynh/tree/testing
+sudo yunohost app upgrade tuwunel -u https://github.com/YunoHost-Apps/tuwunel_ynh/tree/testing
 ```
 
 ### 📚 App packaging documentation
