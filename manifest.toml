@@ -60,6 +60,8 @@ ram.runtime = "50M"
 
         [resources.sources.main]
         in_subdir = false
+        extract = true
+        src_format = "zst"
         rename = "tuwunel"
         amd64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v1.0.0/v1.0.0-release-all-x86_64-linux-gnu-tuwunel.zst"
         amd64.sha256 = "63dc5355eaec268a326198fee1e99f37160eebf20b0f7b00e898b2dcbec8eb66"
