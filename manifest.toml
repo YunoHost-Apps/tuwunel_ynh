@@ -18,7 +18,7 @@ code = "https://github.com/matrix-construct/tuwunel"
 [integration]
 yunohost = ">= 12.0"
 helpers_version = "2.1"
-architectures = [ "amd64" ]
+architectures = [ "arm64", "amd64" ]
 multi_instance = false
 
 ldap = true
@@ -63,8 +63,13 @@ ram.runtime = "50M"
         extract = true
         format = "zst"
         rename = "tuwunel"
+        arm64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v1.0.0/v1.0.0-release-all-x86_64-linux-gnu-tuwunel.zst"
+        arm64.sha256 = "63dc5355eaec268a326198fee1e99f37160eebf20b0f7b00e898b2dcbec8eb66"
         amd64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v1.0.0/v1.0.0-release-all-x86_64-linux-gnu-tuwunel.zst"
         amd64.sha256 = "63dc5355eaec268a326198fee1e99f37160eebf20b0f7b00e898b2dcbec8eb66"
+        autoupdate.strategy = "latest_github_release"
+        autoupdate.asset.arm64 = "^v\\d+(\\.\\d+){2}-release-all-aarch64-v8-linux-gnu-tuwunel\\.zst$"
+        autoupdate.asset.amd64 = "^v\\d+(\\.\\d+){2}-release-all-x86_64-v1-linux-gnu-tuwunel\\.zst$"
 
 [resources.system_user]
 
