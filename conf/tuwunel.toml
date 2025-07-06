@@ -1702,4 +1702,4 @@ filter = "(uid={username})"
 #
 # example: "(objectClass=tuwunelAdmin)" or "(uid={username})"
 #
-admin_filter = "(objectClass=admins)"
+admin_filter = "(&(uid={username})(permission=cn=__APP__.admin,ou=permission,dc=yunohost,dc=org))"
