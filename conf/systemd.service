@@ -1,14 +1,14 @@
 [Unit]
-Description=Conduit: Matrix server
+Description=Tuwunel: Matrix server
 After=network.target
 
 [Service]
 Type=simple
 User=__APP__
 Group=__APP__
-Environment="CONDUIT_CONFIG=__INSTALL_DIR__/conduit.toml"
+Environment="TUWUNEL_CONFIG=__INSTALL_DIR__/tuwunel.toml"
 WorkingDirectory=__INSTALL_DIR__/
-ExecStart=__INSTALL_DIR__/conduit
+ExecStart=__INSTALL_DIR__/tuwunel
 Restart=always
 
 # Sandboxing options to harden security

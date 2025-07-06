@@ -8,8 +8,10 @@ source /usr/share/yunohost/helpers
 #=================================================
 
 federation="true"
+registration_token=$(ynh_string_random --length=27)
 
 ynh_app_setting_set --key=federation --value=$federation
+ynh_app_setting_set --key=registration_token --value=$registration_token
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -19,7 +21,7 @@ ynh_script_progression "Setting up source files..."
 ynh_setup_source --dest_dir="$install_dir"
 
 chown -R $app:root "$install_dir"
-chmod +x "$install_dir/conduit"
+chmod +x "$install_dir/tuwunel"
 
 #=================================================
 # SYSTEM CONFIGURATION
@@ -43,10 +45,10 @@ yunohost service add $app --description="Chat server powered by Matrix" --log="/
 #=================================================
 ynh_script_progression "Adding $app's configuration..."
 
-ynh_config_add --template="conduit.toml" --destination="$install_dir/conduit.toml"
+ynh_config_add --template="tuwunel.toml" --destination="$install_dir/tuwunel.toml"
 
-chmod 400 "$install_dir/conduit.toml"
-chown $app:root "$install_dir/conduit.toml"
+chmod 400 "$install_dir/tuwunel.toml"
+chown $app:root "$install_dir/tuwunel.toml"
 
 #=================================================
 # START SYSTEMD SERVICE
