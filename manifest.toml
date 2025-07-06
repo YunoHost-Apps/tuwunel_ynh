@@ -5,7 +5,7 @@ name = "Tuwunel"
 description.en = "Simple, fast and reliable chat server powered by Matrix based on Conduit and Conduwuit"
 description.fr = "Serveur de chat simple, rapide et fiable alimenté par Matrix"
 
-version = "1.0.0~ynh1"
+version = "1.2.0~ynh1"
 
 maintainers = []
 
@@ -18,7 +18,7 @@ code = "https://github.com/matrix-construct/tuwunel"
 [integration]
 yunohost = ">= 12.0"
 helpers_version = "2.1"
-architectures = [ "amd64" ]
+architectures = [ "arm64", "amd64" ]
 multi_instance = false
 
 ldap = true
@@ -63,8 +63,13 @@ ram.runtime = "50M"
         extract = true
         format = "zst"
         rename = "tuwunel"
-        amd64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v1.0.0/v1.0.0-release-all-x86_64-linux-gnu-tuwunel.zst"
-        amd64.sha256 = "63dc5355eaec268a326198fee1e99f37160eebf20b0f7b00e898b2dcbec8eb66"
+        arm64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v1.2.0/v1.2.0-release-all-aarch64-v8-linux-gnu-tuwunel.zst"
+        arm64.sha256 = "5fc24a0cb09c60eb7f7d57408ea83da9984dec2402e2236539b2b507af1c52ff"
+        amd64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v1.2.0/v1.2.0-release-all-x86_64-v1-linux-gnu-tuwunel.zst"
+        amd64.sha256 = "fa0ac824333f1aa224124c459a1852567c77d6f4b9895e423ecbd685de7f65a8"
+        autoupdate.strategy = "latest_github_release"
+        autoupdate.asset.arm64 = "^v\\d+(\\.\\d+){2}-release-all-aarch64-v8-linux-gnu-tuwunel\\.zst$"
+        autoupdate.asset.amd64 = "^v\\d+(\\.\\d+){2}-release-all-x86_64-v1-linux-gnu-tuwunel\\.zst$"
 
 [resources.system_user]
 
