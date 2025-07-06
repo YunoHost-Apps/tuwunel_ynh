@@ -94,7 +94,7 @@ server_client_infos.auth_header = false
 server_client_infos.protected = true
 
 admin.show_tile = false
-admin.allowed = "admin"
+admin.allowed = "admins"
 admin.label = "Tuwunel served admin"
 
 [resources.ports]
