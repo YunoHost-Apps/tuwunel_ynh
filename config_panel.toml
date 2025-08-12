@@ -12,7 +12,7 @@ services = ["__APP__"]
         type = "boolean"
         yes = "true"
         no = "false"
-        bind = "allow_registration:__INSTALL_DIR__/conduit.toml"
+        bind = "allow_registration:__INSTALL_DIR__/tuwunel.toml"
 
         [main.registration.federation]
         ask = "Allow Federation"
@@ -20,4 +20,4 @@ services = ["__APP__"]
         yes = "true"
         no = "false"
         help = "Communicate with other homeservers of the Matrix Federation."
-        bind = "allow_federation:__INSTALL_DIR__/conduit.toml"
+        bind = "allow_federation:__INSTALL_DIR__/tuwunel.toml"
