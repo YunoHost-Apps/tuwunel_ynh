@@ -1,4 +1,4 @@
-### Login to Conduit
+### Login to Tuwunel
 
 LDAP is supported upstream, log in with normal YNH credentials.
 
