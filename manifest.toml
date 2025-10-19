@@ -40,10 +40,10 @@ ram.runtime = "50M"
     help.fr = "Si vous souhaitez pouvoir fédérer votre serveur avec d'autres, vous devez laisser le choix par défaut, visiteurs"
 
     [install.server_name]
-    ask.en = "Select the display name for your Conduit server"
-    ask.fr = "Sélectionnez le nom d'affichage pour votre serveur Conduit"
-    help.en = "If you choose domain.tld, your Matrix user-ids will be looking like @user:domain.tld instead of @user:conduit.domain.tld"
-    help.fr = "Si vous choisissez domain.tld, vos identifiants Matrix ressembleront à @utilisateur:domain.tld plutôt que @utilisateur:conduit.domain.tld"
+    ask.en = "Select the display name for your Tuwunel server"
+    ask.fr = "Sélectionnez le nom d'affichage pour votre serveur Tuwunel"
+    help.en = "If you choose domain.tld, your Matrix user-ids will be looking like @user:domain.tld instead of @user:tuwunel.domain.tld"
+    help.fr = "Si vous choisissez domain.tld, vos identifiants Matrix ressembleront à @utilisateur:domain.tld plutôt que @utilisateur:tuwunel.domain.tld"
     type = "domain"
 
     [install.registration]
