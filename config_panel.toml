@@ -1,7 +1,7 @@
 version = "1.0"
 
 [main]
-name = "Conduit configuration"
+name = "Tuwunel configuration"
 services = ["__APP__"]
 
     [main.registration]
