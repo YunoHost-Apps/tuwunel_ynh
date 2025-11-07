@@ -11,7 +11,7 @@ It shall NOT be edited by hand.
 Simple, fast and reliable chat server powered by Matrix based on Conduit and Conduwuit
 
 [![🌐 Official app website](https://img.shields.io/badge/Official_app_website-darkgreen?style=for-the-badge)](https://tuwunel.chat/)
-[![Version: 1.4.5~ynh1](https://img.shields.io/badge/Version-1.4.5~ynh1-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/tuwunel/)
+[![Version: 1.4.6~ynh1](https://img.shields.io/badge/Version-1.4.6~ynh1-rgb(18,138,11)?style=for-the-badge)](https://ci-apps.yunohost.org/ci/apps/tuwunel/)
 
 <div align="center">
 <a href="https://apps.yunohost.org/app/tuwunel"><img height="100px" src="https://github.com/YunoHost/yunohost-artwork/raw/refs/heads/main/badges/neopossum-badges/badge_more_info_on_the_appstore.svg"/></a>
