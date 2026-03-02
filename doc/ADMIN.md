@@ -4,7 +4,7 @@ LDAP is supported upstream, log in with normal YNH credentials.
 
 ###  Coturn configuration
 
-To be able to take advantage of audio and video call functionalities, a Coturn server is often required. It is possible to [install a Coturn server in YunoHost (https://github.com/YunoHost-Apps/coturn-ynh/blob/master/README-en.md).
+To be able to take advantage of audio and video call functionalities, a Coturn server is often required. It is possible to [install a Coturn server in YunoHost (https://github.com/YunoHost-Apps/coturn-ynh/blob/master/README.md).
 It is then necessary to fill in the information provided by the Coturn server in the file 'tuwunel.toml' such as:
 
 ```
