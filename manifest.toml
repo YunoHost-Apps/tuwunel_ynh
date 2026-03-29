@@ -36,7 +36,7 @@ ram.runtime = "50M"
     [install.init_main_permission]
     type = "group"
     default = "visitors"
-    help.en = "If you want to be able to federate with other servers, you should let the default choice, visitors"
+    help.en = "If you want to be able to federate with other servers, this must be set to visitors"
     help.fr = "Si vous souhaitez pouvoir fédérer votre serveur avec d'autres, vous devez laisser le choix par défaut, visiteurs"
 
     [install.server_name]
