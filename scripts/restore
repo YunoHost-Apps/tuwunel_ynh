@@ -24,7 +24,7 @@ then
 	ynh_restore "/etc/nginx/conf.d/${server_name}.d/${app}_server_name.conf"
 fi
 
-ynh_restore "/etc/yunohost/hooks.d/post_app_change_url/50-$app"
+ynh_restore "/etc/yunohost/hooks.d/post_app_remove/50-$app"
 
 ynh_restore "/etc/systemd/system/$app.service"
 systemctl enable $app.service --quiet

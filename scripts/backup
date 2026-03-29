@@ -22,7 +22,7 @@ then
     ynh_backup "/etc/nginx/conf.d/${server_name}.d/${app}_server_name.conf"
 fi
 
-ynh_backup "/etc/yunohost/hooks.d/post_app_change_url/50-$app"
+ynh_backup "/etc/yunohost/hooks.d/post_app_remove/50-$app"
 
 #=================================================
 # BACKUP SYSTEMD
