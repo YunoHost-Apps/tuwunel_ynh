@@ -54,6 +54,13 @@ ram.runtime = "50M"
     help.fr = "Si non, les comptes seront créés par un admin après avoir défini un secret. Si oui, la fédération sera désactivée pour protéger la fédération et vous des spammeurs. Activez la vérification par CAPTCHA avant de réactiver la fédération ! Voir les instructions dans le Config Panel"
     default = false
 
+    [install.jitsi_server]
+    ask.en = "Jitsi server address for conferencing"
+    ask.fr = "Adresse du serveur Jitsi pour les conférences ?"
+    type = "string"
+    example = "domain.org"
+    default = "jitsi.riot.im"
+
 [resources]
 
     [resources.sources]
