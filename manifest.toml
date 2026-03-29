@@ -106,3 +106,6 @@ admin.label = "Tuwunel served admin"
 
 [resources.ports]
 main.default = 6167
+
+tuwunel_federation.default = 8448
+tuwunel_federation.exposed = "TCP"
