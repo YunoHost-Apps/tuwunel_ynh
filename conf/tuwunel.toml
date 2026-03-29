@@ -684,15 +684,17 @@ allow_federation = __FEDERATION__
 # example: ["turn:example.turn.uri?transport=udp",
 # "turn:example.turn.uri?transport=tcp"]
 #
-#turn_uris = []
-
+turn_uris = [
+    "turn:__TURN_DOMAIN__:__TURN_EXTERNAL_PORT__?transport=udp",
+    "turn:__TURN_DOMAIN__:__TURN_EXTERNAL_PORT__?transport=tcp"
+]
 # TURN secret to use for generating the HMAC-SHA1 hash apart of username
 # and password generation.
 #
 # This is more secure, but if needed you can use traditional static
 # username/password credentials.
 #
-#turn_secret = false
+turn_secret = "__TURN_PASSWORD__"
 
 # TURN secret to use that's read from the file path specified.
 #
