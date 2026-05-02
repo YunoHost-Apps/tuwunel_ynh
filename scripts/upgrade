@@ -44,7 +44,7 @@ yunohost service add $app --description="Chat server powered by Matrix" --log="/
 #=================================================
 ynh_script_progression "Updating configuration..."
 
-ynh_config_add --template="tuwunel.toml" --destination="$install_dir/tuwunel.toml"
+#ynh_config_add --template="tuwunel.toml" --destination="$install_dir/tuwunel.toml"
 
 chmod 400 "$install_dir/tuwunel.toml"
 chown $app:$app "$install_dir/tuwunel.toml"
