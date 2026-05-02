@@ -11,6 +11,13 @@ ynh_script_progression "Stopping $app's systemd service..."
 ynh_systemctl --service=$app --action="stop" --log_path="systemd"
 
 #=================================================
+# FETCH VARIABLES FOR CONFIG
+#=================================================
+turn_password=$(ynh_app_setting_get --app="coturn" --key=turnserver_pwd)
+turn_external_port=$(ynh_app_setting_get --app="coturn" --key=port_turnserver_tls)
+turn_domain=$(ynh_app_setting_get --app="coturn" --key=domain)
+
+#=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
 #=================================================
 ynh_script_progression "Upgrading source files..."
@@ -37,8 +44,6 @@ ynh_config_add_systemd
 
 yunohost service add $app --description="Chat server powered by Matrix" --log="/var/log/$app/$app.log"
 
-#=================================================
-# RECONFIGURE THE APP (UPDATE CONF, APPLY MIGRATIONS...)
 #=================================================
 # UPDATE A CONFIG FILE
 #=================================================

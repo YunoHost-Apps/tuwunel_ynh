@@ -24,6 +24,20 @@ chown -R $app:root "$install_dir"
 chmod +x "$install_dir/tuwunel"
 
 #=================================================
+# INSTALL COTURN IF NOT INSTALLED
+#=================================================
+# Credit to: https://github.com/YunoHost-Apps/prosody_ynh/blob/testing/scripts/install#L15C1-L22C79
+if ! yunohost app list | grep -q "id: coturn"; then
+        echo "Coturn is not installed. Installing... "
+        yunohost tools update
+        yunohost app install coturn --force --args "domain=$domain"
+fi
+
+turn_password=$(ynh_app_setting_get --app="coturn" --key=turnserver_pwd)
+turn_external_port=$(ynh_app_setting_get --app="coturn" --key=port_turnserver_tls)
+turn_domain=$(ynh_app_setting_get --app="coturn" --key="domain")
+
+#=================================================
 # SYSTEM CONFIGURATION
 #=================================================
 ynh_script_progression "Adding system configurations related to $app..."

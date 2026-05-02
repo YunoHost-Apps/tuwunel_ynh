@@ -36,7 +36,7 @@ ram.runtime = "50M"
     [install.init_main_permission]
     type = "group"
     default = "visitors"
-    help.en = "If you want to be able to federate with other servers, you should let the default choice, visitors"
+    help.en = "If you want to be able to federate with other servers, this must be set to visitors"
     help.fr = "Si vous souhaitez pouvoir fédérer votre serveur avec d'autres, vous devez laisser le choix par défaut, visiteurs"
 
     [install.server_name]
@@ -53,6 +53,13 @@ ram.runtime = "50M"
     help.en = "If no, accounts should be registered by an admin after defining a secret. If yes, to protect your server and the federation from spammer, federation will be deactivated by default. You must Activate CAPTCHA verification before federation reactivation. See Config Panel for instructions"
     help.fr = "Si non, les comptes seront créés par un admin après avoir défini un secret. Si oui, la fédération sera désactivée pour protéger la fédération et vous des spammeurs. Activez la vérification par CAPTCHA avant de réactiver la fédération ! Voir les instructions dans le Config Panel"
     default = false
+
+    [install.jitsi_server]
+    ask.en = "Jitsi server address for conferencing"
+    ask.fr = "Adresse du serveur Jitsi pour les conférences ?"
+    type = "string"
+    example = "domain.org"
+    default = "jitsi.riot.im"
 
 [resources]
 
@@ -99,3 +106,6 @@ admin.label = "Tuwunel served admin"
 
 [resources.ports]
 main.default = 6167
+
+tuwunel_federation.default = 8448
+tuwunel_federation.exposed = "TCP"
