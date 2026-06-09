@@ -14,6 +14,16 @@ fi
 
 ynh_config_remove_systemd
 
+if [ $calls_enabled -eq 1 ]; then
+    yunohost service remove "$app"-livekit
+    yunohost service remove "$app"-lk-jwt
+
+    ynh_config_remove_systemd "$app"-livekit
+    ynh_config_remove_systemd "$app"-lk-jwt
+
+    ynh_safe_rm "/etc/nginx/conf.d/${domain}.d/${app}_livekit.conf"
+fi
+
 ynh_config_remove_nginx
 
 ynh_safe_rm "/etc/nginx/conf.d/${server_name}.d/${app}_server_name.conf"
@@ -21,5 +31,9 @@ ynh_safe_rm "/etc/nginx/conf.d/${server_name}.d/${app}_server_name.conf"
 #=================================================
 # END OF SCRIPT
 #=================================================
+
+if yunohost app list | grep -q "id: coturn"; then
+    ynh_print_info "The coturn app was not removed. If no other apps use it, feel free to also remove coturn separately."
+fi
 
 ynh_script_progression "Removal of $app completed"
