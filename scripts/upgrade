@@ -6,8 +6,9 @@ source /usr/share/yunohost/helpers
 #=================================================
 # SET DEFAULT VALUES
 #=================================================
-ynh_app_setting_set_default --app="$app" --key=calls_enabled --value=0
-ynh_app_setting_set_default --app="$app" --key=jitsi_server --value="jitsi.riot.im"
+ynh_app_setting_set_default --key=calls_enabled --value=0
+ynh_app_setting_set_default --key=last_calls_enabled --value=0
+ynh_app_setting_set_default --key=jitsi_server --value="jitsi.riot.im"
 
 #=================================================
 # STOP SYSTEMD SERVICE
@@ -105,7 +106,11 @@ fi
 #=================================================
 ynh_script_progression "Updating configuration..."
 
-ynh_config_add --template="tuwunel.toml" --destination="$install_dir/tuwunel.toml"
+if [ $last_calls_enabled -ne $calls_enabled ]; then
+    ynh_config_add --template="tuwunel.toml" --destination="$install_dir/tuwunel.toml"
+    ynh_app_setting_set --key=last_calls_enabled --value=$calls_enabled
+fi
+
 
 if [ $calls_enabled -eq 1 ]; then
     ynh_config_add --template=livekit.yml --destination=$install_dir/livekit/livekit.yml
