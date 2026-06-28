@@ -4,11 +4,23 @@ source _common.sh
 source /usr/share/yunohost/helpers
 
 #=================================================
+# SET DEFAULT VALUES
+#=================================================
+ynh_app_setting_set_default --key=calls_enabled --value=0
+ynh_app_setting_set_default --key=last_calls_enabled --value=0
+ynh_app_setting_set_default --key=jitsi_server --value="jitsi.riot.im"
+
+#=================================================
 # STOP SYSTEMD SERVICE
 #=================================================
 ynh_script_progression "Stopping $app's systemd service..."
 
 ynh_systemctl --service=$app --action="stop" --log_path="systemd"
+
+if [ $calls_enabled -eq 1 ]; then
+    ynh_systemctl --service="$app"-livekit.service --action=stop
+    ynh_systemctl --service="$app"-lk-jwt.service --action=stop
+fi
 
 #=================================================
 # DOWNLOAD, CHECK AND UNPACK SOURCE
@@ -20,31 +32,91 @@ ynh_setup_source --dest_dir="$install_dir" --keep="tuwunel.toml"
 chown -R $app:root "$install_dir"
 chmod +x "$install_dir/tuwunel"
 
+if [ $calls_enabled -eq 1 ]; then
+    ynh_app_setting_set_default --key=livekit_secret --value="$(ynh_string_random --length=40)"
+
+    # Install livekit jwt
+    ynh_setup_source --source_id=lk_jwt --dest_dir="$install_dir/lk_jwt"
+
+    chmod +x "$install_dir/lk_jwt/lk-jwt-service"
+    chown "$app" -R "$install_dir"
+
+    # Install livekit server for element-call
+    ynh_setup_source --source_id=livekit --dest_dir="$install_dir/livekit"
+fi
+
+#=================================================
+# INSTALL COTURN IF NOT INSTALLED
+#=================================================
+# Credit to: https://github.com/YunoHost-Apps/prosody_ynh/blob/testing/scripts/install#L15C1-L22C79
+# This is put in the upgrade script in case the user enables calls before upgrading, e.g. if they mistakenly disabled them during install
+if [ $calls_enabled -eq 1 ]; then
+    if ! yunohost app list | grep -q "id: coturn"; then
+            echo "Coturn is not installed. Installing... "
+            yunohost tools update
+            yunohost app install coturn --force --args "domain=$domain"
+    fi
+
+    turn_password=$(ynh_app_setting_get --app="coturn" --key=turnserver_pwd)
+    turn_external_port=$(ynh_app_setting_get --app="coturn" --key=port_turnserver_tls)
+    turn_domain=$(ynh_app_setting_get --app="coturn" --key="domain")
+else
+    turn_password=""
+    turn_external_port=""
+    turn_domain=""
+fi
+
 #=================================================
 # REAPPLY SYSTEM CONFIGURATIONS
 #=================================================
 ynh_script_progression "Upgrading system configurations related to $app..."
 
-ynh_config_add_nginx
-
 # Create .well-known redirection for access by federation
 if yunohost --output-as plain domain list | grep -q "^$server_name$"
 then
-    ynh_config_add --template="server_name.conf" --destination="/etc/nginx/conf.d/${server_name}.d/${app}_server_name.conf"
+    if [ $calls_enabled -eq 1 ]; then
+        ynh_config_add --template="server_name_livekit.conf" --destination="/etc/nginx/conf.d/${server_name}.d/${app}_server_name.conf"
+        ynh_config_add --template="nginx_livekit.conf" --destination="/etc/nginx/conf.d/${domain}.d/${app}_livekit.conf"
+    else
+        # If user disables calls, remove livekit nginx config
+        if [ -e "/etc/nginx/conf.d/${domain}.d/${app}_livekit.conf" ]; then
+            ynh_safe_rm "/etc/nginx/conf.d/${domain}.d/${app}_livekit.conf"
+        fi
+        ynh_config_add --template="server_name.conf" --destination="/etc/nginx/conf.d/${server_name}.d/${app}_server_name.conf"
+    fi
 fi
+
+ynh_config_add_nginx
 
 ynh_config_add_systemd
 
 yunohost service add $app --description="Chat server powered by Matrix" --log="/var/log/$app/$app.log"
 
-#=================================================
-# RECONFIGURE THE APP (UPDATE CONF, APPLY MIGRATIONS...)
+if [ $calls_enabled -eq 1 ]; then
+    get_lk_node_ip
+    ynh_config_add_systemd --service="$app"-livekit --template=$app-livekit.service
+    ynh_config_add_systemd --service="$app"-lk-jwt --template=$app-lk-jwt.service
+
+    yunohost service add "$app"-livekit --description 'Livekit server for element call.'
+    yunohost service add "$app"-lk-jwt --description 'RTC Livekit JWT service for element call.'
+fi
+
 #=================================================
 # UPDATE A CONFIG FILE
 #=================================================
 ynh_script_progression "Updating configuration..."
 
-#ynh_config_add --template="tuwunel.toml" --destination="$install_dir/tuwunel.toml"
+if [ $last_calls_enabled -ne $calls_enabled ]; then
+    ynh_script_progression "Updating tuwunel.toml..."
+    ynh_config_add --template="tuwunel.toml" --destination="$install_dir/tuwunel.toml"
+    ynh_app_setting_set --key=last_calls_enabled --value=$calls_enabled
+fi
+
+
+if [ $calls_enabled -eq 1 ]; then
+    ynh_config_add --template=livekit.yml --destination=$install_dir/livekit/livekit.yml
+    ynh_config_add --template=lk-jwt.conf --destination=$install_dir/lk_jwt/lk-jwt.conf
+fi
 
 chmod 400 "$install_dir/tuwunel.toml"
 chown $app:$app "$install_dir/tuwunel.toml"
@@ -55,6 +127,11 @@ chown $app:$app "$install_dir/tuwunel.toml"
 ynh_script_progression "Starting $app's systemd service..."
 
 ynh_systemctl --service=$app --action="start" --log_path="systemd"
+
+if [ $calls_enabled -eq 1 ]; then
+    ynh_systemctl --service="$app"-livekit.service --action=restart
+    ynh_systemctl --service="$app"-lk-jwt.service --action=restart
+fi
 
 #=================================================
 # END OF SCRIPT

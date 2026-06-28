@@ -24,10 +24,27 @@ then
 	ynh_restore "/etc/nginx/conf.d/${server_name}.d/${app}_server_name.conf"
 fi
 
+if [ $calls_enabled -eq 1 ]; then
+    ynh_restore "/etc/nginx/conf.d/${domain}.d/${app}_livekit.conf"
+fi
+
+ynh_restore "/etc/yunohost/hooks.d/post_app_remove/50-$app"
+
 ynh_restore "/etc/systemd/system/$app.service"
 systemctl enable $app.service --quiet
 
 yunohost service add $app --description="Chat server powered by Matrix" --log="/var/log/$app/$app.log"
+
+if [ $calls_enabled -eq 1 ]; then
+    ynh_restore /etc/systemd/system/"$app"-livekit.service
+    ynh_restore /etc/systemd/system/"$app"-lk-jwt.service
+
+    systemctl enable "$app"-livekit.service --quiet
+    systemctl enable "$app"-lk-jwt.service --quiet
+
+    yunohost service add "$app"-livekit --description 'Livekit server for element call.'
+    yunohost service add "$app"-lk-jwt --description 'RTC Livekit JWT service for element call.'
+fi
 
 #=================================================
 # RELOAD NGINX AND PHP-FPM OR THE APP SERVICE
@@ -35,6 +52,10 @@ yunohost service add $app --description="Chat server powered by Matrix" --log="/
 ynh_script_progression "Reloading NGINX web server and $app's service..."
 
 ynh_systemctl --service=$app --action="start" --log_path="systemd"
+if [ $calls_enabled -eq 1 ]; then
+    ynh_systemctl --service="$app"-livekit.service --action=restart
+    ynh_systemctl --service="$app"-lk-jwt.service --action=restart
+fi
 
 ynh_systemctl --service=nginx --action=reload
 

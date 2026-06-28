@@ -14,4 +14,20 @@ test_format = 1.0
 
     args.server_name = "domain.tld"
     args.registration = false
-    
+
+[with_livekit]
+
+    # ------------
+    # Tests to run
+    # ------------
+
+    exclude = ["install.private"]
+
+    # -------------------------------
+    # Default args to use for install
+    # -------------------------------
+
+    args.server_name = "domain.tld"
+    args.registration = true
+    args.calls_enabled = true
+    args.jitsi_server = "domain.tld"

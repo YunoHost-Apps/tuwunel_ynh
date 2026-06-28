@@ -22,11 +22,22 @@ then
     ynh_backup "/etc/nginx/conf.d/${server_name}.d/${app}_server_name.conf"
 fi
 
+if [ $calls_enabled -eq 1 ]; then
+    ynh_backup "/etc/nginx/conf.d/${domain}.d/${app}_livekit.conf"
+fi
+
+ynh_backup "/etc/yunohost/hooks.d/post_app_remove/50-$app"
+
 #=================================================
 # BACKUP SYSTEMD
 #=================================================
 
 ynh_backup "/etc/systemd/system/$app.service"
+
+if [ $calls_enabled -eq 1 ]; then
+    ynh_backup /etc/systemd/system/"$app"-livekit.service
+    ynh_backup /etc/systemd/system/"$app"-lk-jwt.service
+fi
 
 #=================================================
 # END OF SCRIPT

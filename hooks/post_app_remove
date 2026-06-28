@@ -1,0 +1,24 @@
+#!/bin/bash
+#YNH_HELPERS_VERSION=2.1
+source /usr/share/yunohost/helpers
+
+if [[ "$YNH_APP_ID" == "coturn" ]]; then
+  ynh_print_warn "Warning: Voice/video chat on tuwunel will now be broken, as it depends on coturn. You may force-upgrade to apply a new config after reinstalling coturn by running sudo yunohost app upgrade tuwunel --force"
+  sleep 5s
+fi
+#app="tuwunel"
+#install_dir=$(ynh_app_setting_get --app="$app" --key=install_dir)
+#php_version=$(ynh_app_setting_get --app="$app" --key=php_version)
+#
+#yunohost service stop __APP__
+#cd __INSTALL_DIR__
+#
+#turn_password=$(ynh_app_setting_get --app="coturn" --key=turnserver_pwd)
+#turn_external_port=$(ynh_app_setting_get --app="coturn" --key=port_turnserver_tls)
+#turn_domain=$(ynh_app_setting_get --app="coturn" --key="domain")
+#
+#_ynh_app_config_apply
+#chmod 400 "$install_dir/tuwunel.toml"
+#chown $app:root "$install_dir/tuwunel.toml"
+#
+#yunohost service start __APP__
