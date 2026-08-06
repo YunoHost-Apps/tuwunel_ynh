@@ -107,7 +107,7 @@ fi
 #=================================================
 ynh_script_progression "Updating configuration..."
 
-if [ $last_calls_enabled -!= $calls_enabled || $overwrite_config == 1 ]; then
+if [ $last_calls_enabled != $calls_enabled ] || [ $overwrite_config == 1 ]; then
     ynh_script_progression "Updating tuwunel.toml..."
     ynh_config_add --template="tuwunel.toml" --destination="$install_dir/tuwunel.toml"
     ynh_app_setting_set --key=last_calls_enabled --value=$calls_enabled
