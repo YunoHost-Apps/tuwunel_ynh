@@ -51,7 +51,7 @@ fi
 #=================================================
 ynh_script_progression "Reloading NGINX web server and $app's service..."
 
-ynh_systemctl --service=$app --action="start" --log_path="systemd"
+ynh_systemctl --service=$app --action="start" --log_path="systemd" --wait_until="INFO tuwunel_router::serve: Listening on \[\"tcp:127.0.0.1:"
 if [ $calls_enabled -eq 1 ]; then
     ynh_systemctl --service="$app"-livekit.service --action=restart
     ynh_systemctl --service="$app"-lk-jwt.service --action=restart

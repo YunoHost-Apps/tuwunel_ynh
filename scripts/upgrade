@@ -127,7 +127,7 @@ chown $app:$app "$install_dir/tuwunel.toml"
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemctl --service=$app --action="start" --log_path="systemd"
+ynh_systemctl --service=$app --action="start" --log_path="systemd" --wait_until="INFO tuwunel_router::serve: Listening on \[\"tcp:127.0.0.1:"
 
 if [ $calls_enabled -eq 1 ]; then
     ynh_systemctl --service="$app"-livekit.service --action=restart
