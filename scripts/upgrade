@@ -9,6 +9,7 @@ source /usr/share/yunohost/helpers
 ynh_app_setting_set_default --key=calls_enabled --value=0
 ynh_app_setting_set_default --key=last_calls_enabled --value=0
 ynh_app_setting_set_default --key=jitsi_server --value="jitsi.riot.im"
+ynh_app_setting_set_default --key=overwrite_config --value=0
 
 #=================================================
 # STOP SYSTEMD SERVICE
@@ -106,7 +107,7 @@ fi
 #=================================================
 ynh_script_progression "Updating configuration..."
 
-if [ $last_calls_enabled -ne $calls_enabled ]; then
+if [ $last_calls_enabled != $calls_enabled ] || [ $overwrite_config == 1 ]; then
     ynh_script_progression "Updating tuwunel.toml..."
     ynh_config_add --template="tuwunel.toml" --destination="$install_dir/tuwunel.toml"
     ynh_app_setting_set --key=last_calls_enabled --value=$calls_enabled
@@ -126,7 +127,7 @@ chown $app:$app "$install_dir/tuwunel.toml"
 #=================================================
 ynh_script_progression "Starting $app's systemd service..."
 
-ynh_systemctl --service=$app --action="start" --log_path="systemd"
+ynh_systemctl --service=$app --action="start" --log_path="systemd" --wait_until="INFO tuwunel_router::serve: Listening on \[\"tcp:127.0.0.1:"
 
 if [ $calls_enabled -eq 1 ]; then
     ynh_systemctl --service="$app"-livekit.service --action=restart
