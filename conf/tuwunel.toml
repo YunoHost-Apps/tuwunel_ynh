@@ -3446,7 +3446,7 @@ admin_filter = "(&(uid={username})(permission=cn=__APP__.admin,ou=permission,dc=
 
 
 
-#[global.smtp]
+[global.smtp]
 
 # Connection URL for the outbound SMTP relay used to send email
 # verification messages. Setting this enables the email subsystem;
@@ -3465,14 +3465,14 @@ admin_filter = "(&(uid={username})(permission=cn=__APP__.admin,ou=permission,dc=
 #
 # example: "smtps://user:pass@mail.example.com:465"
 #
-#connection_uri =
+connection_uri = "smtps://__APP__:__MAIL_PWD__@127.0.0.1:465"
 
 # The mailbox that outbound verification messages are sent from. Accepts
 # either a bare address or a display-name form.
 #
 # example: "Example <noreply@example.com>"
 #
-#sender =
+sender = "Tuwunel <__APP__@__DOMAIN__>"
 
 # Require a verified email address to complete registration. When set,
 # the registration flow does not finish until the user proves control of
