@@ -11,6 +11,10 @@ WorkingDirectory=__INSTALL_DIR__/
 ExecStart=__INSTALL_DIR__/tuwunel
 Restart=always
 
+# Type=notify-reload would report completion, but it needs systemd 253 and
+# Debian 12 ships 252, where an unparsable Type= silently falls back to simple.
+ExecReload=/bin/kill -s USR1 $MAINPID
+
 # Sandboxing options to harden security
 # Depending on specificities of your service/app, you may need to tweak these
 # .. but this should be a good baseline
