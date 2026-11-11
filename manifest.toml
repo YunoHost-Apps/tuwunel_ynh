@@ -101,9 +101,9 @@ ram.runtime = "50M"
         amd64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v1.9.4/v1.9.4-release-all-x86_64-v1-linux-gnu-tuwunel.zst"
         amd64.sha256 = "78628e6d13deda9e4832aeb93f2d10332e3c4e70a8815b45e6ef773404edd5a3"
         autoupdate.strategy = "latest_github_release"
-	autoupdate.version_regex = "v(\\d+\.\\d+\\.\\d+)-assets"
-        autoupdate.asset.arm64 = "^v\\d+(\\.\\d+){2,3}-release-default-aarch64-v8-linux-gnu-tuwunel\\.zst$"
-        autoupdate.asset.amd64 = "^v\\d+(\\.\\d+){2,3}-release-default-x86_64-v1-linux-gnu-tuwunel\\.zst$"
+	autoupdate.version_regex = "v(\\d+\\.\\d+\\.\\d+)-assets"
+        autoupdate.asset.arm64 = "^v\\d+(\\.\\d+){2,3}-assets-release-default-aarch64-v8-linux-gnu-tuwunel\\.zst$"
+        autoupdate.asset.amd64 = "^v\\d+(\\.\\d+){2,3}-assets-release-default-x86_64-v1-linux-gnu-tuwunel\\.zst$"
 
 [resources.system_user]
 
