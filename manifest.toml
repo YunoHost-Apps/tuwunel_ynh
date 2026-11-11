@@ -90,8 +90,6 @@ ram.runtime = "50M"
         amd64.sha256 = "9b89eb169c6c5795393bad6b52a9d0c73640a5993b37162558b4e249e5fe3aee"
         arm64.url = "https://github.com/livekit/livekit/releases/download/v1.12.0/livekit_1.12.0_linux_arm64.tar.gz"
         arm64.sha256 = "e72adb7d824b300ce54dde7c80c901d4062d1ca2f74b14d6fa56cbe32cc2b07a"
-        armhf.url = "https://github.com/livekit/livekit/releases/download/v1.12.0/livekit_1.12.0_linux_armv7.tar.gz"
-        armhf.sha256 = "3b9923616ace3b192aeab8d9604817a08297dbc91d7ea5a34833d49ec78c3240"
 
         [resources.sources.main]
         in_subdir = false
@@ -103,8 +101,9 @@ ram.runtime = "50M"
         amd64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v1.9.4/v1.9.4-release-all-x86_64-v1-linux-gnu-tuwunel.zst"
         amd64.sha256 = "78628e6d13deda9e4832aeb93f2d10332e3c4e70a8815b45e6ef773404edd5a3"
         autoupdate.strategy = "latest_github_release"
-        autoupdate.asset.arm64 = "^v\\d+(\\.\\d+){2,3}-release-all-aarch64-v8-linux-gnu-tuwunel\\.zst$"
-        autoupdate.asset.amd64 = "^v\\d+(\\.\\d+){2,3}-release-all-x86_64-v1-linux-gnu-tuwunel\\.zst$"
+	autoupdate.version_regex = "v(\\d+\.\\d+\\.\\d+)-assets"
+        autoupdate.asset.arm64 = "^v\\d+(\\.\\d+){2,3}-release-default-aarch64-v8-linux-gnu-tuwunel\\.zst$"
+        autoupdate.asset.amd64 = "^v\\d+(\\.\\d+){2,3}-release-default-x86_64-v1-linux-gnu-tuwunel\\.zst$"
 
 [resources.system_user]
 
