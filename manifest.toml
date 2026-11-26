@@ -5,7 +5,7 @@ name = "Tuwunel"
 description.en = "Simple, fast and reliable chat server powered by Matrix based on Conduit and Conduwuit"
 description.fr = "Serveur de chat simple, rapide et fiable alimenté par Matrix"
 
-version = "2.0.0~ynh1"
+version = "2.1.0~ynh1"
 
 maintainers = []
 
@@ -81,6 +81,11 @@ ram.runtime = "50M"
         arm64.url = "https://github.com/element-hq/lk-jwt-service/releases/download/v0.5.0/lk-jwt-service_linux_arm64"
         arm64.sha256 = "ed0ba3be3fb6bd3fcf8ece8d835a5b7c0a7f8bc89fe562002b843b73c4e7914c"
 
+        autoupdate.strategy = "latest_github_release"
+        autoupdate.upstream = "https://github.com/element-hq/lk-jwt-service"
+        autoupdate.asset.arm64 = "lk-jwt-service_linux_arm64"
+        autoupdate.asset.amd64 = "lk-jwt-service_linux_amd64"
+
         [resources.sources.livekit]
         prefetch = false
         extract = true
@@ -91,19 +96,24 @@ ram.runtime = "50M"
         arm64.url = "https://github.com/livekit/livekit/releases/download/v1.12.0/livekit_1.12.0_linux_arm64.tar.gz"
         arm64.sha256 = "e72adb7d824b300ce54dde7c80c901d4062d1ca2f74b14d6fa56cbe32cc2b07a"
 
+        autoupdate.strategy = "latest_github_release"
+        autoupdate.upstream = "https://github.com/livekit/livekit"
+        autoupdate.asset.arm64 = "livekit_\\d+(\\.\\d+)+_linux_arm64\\.tar\\.gz"
+        autoupdate.asset.amd64 = "livekit_\\d+(\\.\\d+)+_linux_amd64\\.tar\\.gz"
+
         [resources.sources.main]
         in_subdir = false
         extract = true
         format = "zst"
         rename = "tuwunel"
-        arm64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v2.0.0-assets/v2.0.0-assets-release-default-aarch64-v8-linux-gnu-tuwunel.zst"
-        arm64.sha256 = "4a2b885d492817bcee21fcc43f8053384d9e6a9af3245faac679fa9612e40444"
-        amd64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v2.0.0-assets/v2.0.0-assets-release-default-x86_64-v1-linux-gnu-tuwunel.zst"
-        amd64.sha256 = "1e4df9d39b6a62d4c98fd8732c57525b03e4c61654df1d2b7cfb61da9af97a0d"
+        arm64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v2.1.0/v2.1.0-release-default-aarch64-v8-linux-gnu-tuwunel.zst"
+        arm64.sha256 = "9e657ae6b960b93b215f6926e91c02e22fe478576cea765d13a4812f54386049"
+        amd64.url = "https://github.com/matrix-construct/tuwunel/releases/download/v2.1.0/v2.1.0-release-default-x86_64-v1-linux-gnu-tuwunel.zst"
+        amd64.sha256 = "05c686aeae2c8ef01d288de844347c0630cd982862b5f9cbb8972cd20dc424a4"
         autoupdate.strategy = "latest_github_release"
-	autoupdate.version_regex = "v(\\d+\\.\\d+\\.\\d+)-assets"
-        autoupdate.asset.arm64 = "^v\\d+(\\.\\d+){2,3}-assets-release-default-aarch64-v8-linux-gnu-tuwunel\\.zst$"
-        autoupdate.asset.amd64 = "^v\\d+(\\.\\d+){2,3}-assets-release-default-x86_64-v1-linux-gnu-tuwunel\\.zst$"
+	#autoupdate.version_regex = "v(\\d+\\.\\d+\\.\\d+)"
+        autoupdate.asset.arm64 = "^v\\d+(\\.\\d+){2,3}-release-default-aarch64-v8-linux-gnu-tuwunel\\.zst$"
+        autoupdate.asset.amd64 = "^v\\d+(\\.\\d+){2,3}-release-default-x86_64-v1-linux-gnu-tuwunel\\.zst$"
 
 [resources.system_user]
 
